@@ -4,11 +4,12 @@ const sass = require("gulp-sass");
 const babel = require("gulp-babel");
 const autoprefixer = require("gulp-autoprefixer");
 const nodemon = require("gulp-nodemon");
+const webpack = require("webpack-stream");
 
 gulp.task("browser-sync", function() {
     browserSync.init({
         proxy: "localhost:8000",
-        port: 4000
+        port: 3000
     });
 });
 
@@ -23,6 +24,7 @@ gulp.task("buildStyles", function() {
         .pipe(browserSync.stream());
 });
 
+/*
 gulp.task("buildScripts", function() {
     return gulp.src("source/scripts/*.js")
         .pipe(babel({
@@ -30,6 +32,13 @@ gulp.task("buildScripts", function() {
         }))
         .pipe(gulp.dest("dist/scripts"))
         .pipe(browserSync.stream());
+});
+*/
+
+gulp.task("buildScripts", function() {
+    return gulp.src("source/scripts/index.js")
+        .pipe(webpack( require('./webpack.config.js') ))
+        .pipe(gulp.dest('dist/scripts/'));
 });
 
 gulp.task("buildServerStyles", function() {
