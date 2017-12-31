@@ -24,17 +24,6 @@ gulp.task("buildStyles", function() {
         .pipe(browserSync.stream());
 });
 
-/*
-gulp.task("buildScripts", function() {
-    return gulp.src("source/scripts/*.js")
-        .pipe(babel({
-            presets: ['es2015']
-        }))
-        .pipe(gulp.dest("dist/scripts"))
-        .pipe(browserSync.stream());
-});
-*/
-
 gulp.task("buildScripts", function() {
     return gulp.src("source/scripts/index.js")
         .pipe(webpack( require('./webpack.config.js') ))
@@ -71,7 +60,7 @@ gulp.task("watch", function() {
         browserSync.reload();
     });
     gulp.watch("./source/styles/*.scss", ["buildStyles"]);
-    gulp.watch("./source/scripts/*.js", ["buildScripts"]);
+    gulp.watch("./source/scripts/**/*.js", ["buildScripts"]);
 });
 
 gulp.task("default", function() {

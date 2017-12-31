@@ -2,13 +2,35 @@
 export default class Ball {
 
   constructor(options = {}) {
-    console.log("THIS RUNS");
     this.x = options.x || 100;
     this.y = options.y || 100;
-    this.vx = options.vx || 2;
-    this.vy = options.vy || 5;
+    this.vx = options.vx || 1;
+    this.vy = options.vy || 1;
     this.radius = options.radius || 25;
     this.color = options.color || '#0000FF';
+  }
+
+  getPosition() {
+    return {
+      x: this.x,
+      y: this.y
+    }
+  }
+
+  getVelocity() {
+    return {
+      vx: this.vx,
+      vy: this.vy
+    }
+  }
+
+  getRadius() {
+    return this.radius;
+  }
+
+  setVelocity(newVelocity) {
+    this.vx = newVelocity.vx;
+    this.vy = newVelocity.vy;
   }
   
   updatePosition() {
